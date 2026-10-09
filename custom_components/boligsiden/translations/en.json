@@ -1,0 +1,96 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Add a Boligsiden search",
+        "description": "Get notified about homes for sale in a Danish town.",
+        "data": {
+          "city": "City",
+          "property_types": "Property types",
+          "price_min": "Minimum price",
+          "price_max": "Maximum price",
+          "scan_interval": "Update interval"
+        },
+        "data_description": {
+          "city": "The postal town as Boligsiden names it, e.g. \"Næstved\" or \"Aarhus C\".",
+          "price_min": "Optional.",
+          "price_max": "Optional.",
+          "scan_interval": "How often to check for new listings, in minutes. Minimum 60."
+        }
+      }
+    },
+    "error": {
+      "city_not_found": "City not found on Boligsiden. Use the postal town name, e.g. \"Aarhus C\".",
+      "cannot_connect": "Could not reach Boligsiden. Try again later.",
+      "no_property_types": "Select at least one property type.",
+      "price_range": "Maximum price must be higher than minimum price."
+    },
+    "abort": {
+      "already_configured": "This search is already set up."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Search options",
+        "data": {
+          "price_min": "Minimum price",
+          "price_max": "Maximum price",
+          "scan_interval": "Update interval"
+        },
+        "data_description": {
+          "scan_interval": "How often to check for new listings, in minutes. Minimum 60."
+        }
+      }
+    },
+    "error": {
+      "price_range": "Maximum price must be higher than minimum price."
+    }
+  },
+  "selector": {
+    "property_type": {
+      "options": {
+        "villa": "Villa",
+        "terraced_house": "Terraced house",
+        "condo": "Condo",
+        "villa_apartment": "Villa apartment",
+        "cooperative": "Cooperative",
+        "holiday_house": "Holiday house",
+        "farm": "Farm",
+        "hobby_farm": "Hobby farm",
+        "full_year_plot": "Plot (year-round)",
+        "holiday_plot": "Plot (holiday)"
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "listings": {
+        "name": "Listings"
+      },
+      "newest_listing": {
+        "name": "Newest listing"
+      },
+      "lowest_price": {
+        "name": "Lowest price"
+      },
+      "average_price_per_m2": {
+        "name": "Average price per m²"
+      }
+    },
+    "event": {
+      "listing_update": {
+        "name": "Listing update",
+        "state_attributes": {
+          "event_type": {
+            "state": {
+              "new_listing": "New listing",
+              "price_changed": "Price changed",
+              "listing_removed": "Listing removed"
+            }
+          }
+        }
+      }
+    }
+  }
+}

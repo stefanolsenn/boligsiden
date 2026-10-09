@@ -1,0 +1,96 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Tilføj en Boligsiden-søgning",
+        "description": "Få besked om boliger til salg i en dansk by.",
+        "data": {
+          "city": "By",
+          "property_types": "Boligtyper",
+          "price_min": "Minimumspris",
+          "price_max": "Maksimumspris",
+          "scan_interval": "Opdateringsinterval"
+        },
+        "data_description": {
+          "city": "Postbyen som Boligsiden skriver den, f.eks. \"Næstved\" eller \"Aarhus C\".",
+          "price_min": "Valgfri.",
+          "price_max": "Valgfri.",
+          "scan_interval": "Hvor ofte der tjekkes for nye boliger, i minutter. Mindst 60."
+        }
+      }
+    },
+    "error": {
+      "city_not_found": "Byen blev ikke fundet på Boligsiden. Brug postbyens navn, f.eks. \"Aarhus C\".",
+      "cannot_connect": "Kunne ikke få forbindelse til Boligsiden. Prøv igen senere.",
+      "no_property_types": "Vælg mindst én boligtype.",
+      "price_range": "Maksimumsprisen skal være højere end minimumsprisen."
+    },
+    "abort": {
+      "already_configured": "Denne søgning er allerede sat op."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Søgeindstillinger",
+        "data": {
+          "price_min": "Minimumspris",
+          "price_max": "Maksimumspris",
+          "scan_interval": "Opdateringsinterval"
+        },
+        "data_description": {
+          "scan_interval": "Hvor ofte der tjekkes for nye boliger, i minutter. Mindst 60."
+        }
+      }
+    },
+    "error": {
+      "price_range": "Maksimumsprisen skal være højere end minimumsprisen."
+    }
+  },
+  "selector": {
+    "property_type": {
+      "options": {
+        "villa": "Villa",
+        "terraced_house": "Rækkehus",
+        "condo": "Ejerlejlighed",
+        "villa_apartment": "Villalejlighed",
+        "cooperative": "Andelsbolig",
+        "holiday_house": "Fritidshus",
+        "farm": "Landejendom",
+        "hobby_farm": "Nedlagt landbrug",
+        "full_year_plot": "Helårsgrund",
+        "holiday_plot": "Fritidsgrund"
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "listings": {
+        "name": "Boliger til salg"
+      },
+      "newest_listing": {
+        "name": "Nyeste bolig"
+      },
+      "lowest_price": {
+        "name": "Laveste pris"
+      },
+      "average_price_per_m2": {
+        "name": "Gennemsnitlig kvadratmeterpris"
+      }
+    },
+    "event": {
+      "listing_update": {
+        "name": "Boligopdatering",
+        "state_attributes": {
+          "event_type": {
+            "state": {
+              "new_listing": "Ny bolig",
+              "price_changed": "Prisændring",
+              "listing_removed": "Bolig fjernet"
+            }
+          }
+        }
+      }
+    }
+  }
+}

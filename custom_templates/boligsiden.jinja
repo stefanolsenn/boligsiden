@@ -1,0 +1,25 @@
+{#
+  Markdown table of the listings from a Boligsiden "Listings" sensor.
+  Copy this file to /config/custom_templates/ and use it in a Markdown card:
+
+    {% from 'boligsiden.jinja' import listings_table %}
+    {{ listings_table('sensor.boligsiden_naestved_listings') }}
+
+  Optional: listings_table(entity_id, limit=10, images=true)
+#}
+{% macro kr(value) -%}
+  {{ '{:,}'.format(value | int).replace(',', '.') }} kr.
+{%- endmacro %}
+
+{% macro listings_table(entity_id, limit=20, images=false) -%}
+{%- set listings = state_attr(entity_id, 'listings') or [] -%}
+{%- if listings | length == 0 -%}
+No listings right now.
+{%- else -%}
+{% if images %}| | {% else %}| {% endif %}Address | Price | m² | Rooms | Days |
+{% if images %}|---{% endif %}|---|---:|---:|---:|---:|
+{% for l in listings[:limit] -%}
+{% if images %}| {% if l.image %}<img src="{{ l.image }}" width="120">{% endif %} {% endif %}| [{{ l.address }}]({{ l.url }}) | {{ kr(l.price) }}{% if l.price_change_percentage %} ({{ l.price_change_percentage }}%){% endif %} | {{ l.living_area or '' }} | {{ l.rooms or '' }} | {{ l.days_listed }} |
+{% endfor -%}
+{%- endif -%}
+{%- endmacro %}

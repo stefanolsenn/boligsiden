@@ -1,0 +1,35 @@
+name: Release
+
+# Publish a GitHub release with a tag like v0.2.0. This writes the version into
+# manifest.json and attaches the zip that HACS installs.
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Build release zip
+    runs-on: ubuntu-latest
+    env:
+      COMPONENT_PATH: custom_components/boligsiden
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Set version in manifest
+        run: |
+          version="${GITHUB_REF_NAME#v}"
+          jq --arg v "$version" '.version = $v' "$COMPONENT_PATH/manifest.json" > manifest.tmp
+          mv manifest.tmp "$COMPONENT_PATH/manifest.json"
+
+      - name: Zip integration
+        run: |
+          cd "$COMPONENT_PATH"
+          zip -r "$GITHUB_WORKSPACE/boligsiden.zip" . -x "__pycache__/*"
+
+      - name: Upload zip to release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "$GITHUB_REF_NAME" boligsiden.zip --clobber

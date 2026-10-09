@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Run a local Home Assistant at http://localhost:8123 with this integration loaded.
+set -e
+cd "$(dirname "$0")/.."
+
+if [[ ! -f "${PWD}/config/.HA_VERSION" ]]; then
+    .venv/bin/hass --config "${PWD}/config" --script ensure_config
+fi
+
+# Load custom_components from the repo without symlinking into config/.
+export PYTHONPATH="${PYTHONPATH}:${PWD}"
+.venv/bin/hass --config "${PWD}/config" --debug

@@ -1,0 +1,23 @@
+{
+  "entity": {
+    "event": {
+      "listing_update": {
+        "default": "mdi:home-alert"
+      }
+    },
+    "sensor": {
+      "listings": {
+        "default": "mdi:home-city"
+      },
+      "newest_listing": {
+        "default": "mdi:new-box"
+      },
+      "lowest_price": {
+        "default": "mdi:cash"
+      },
+      "average_price_per_m2": {
+        "default": "mdi:ruler-square"
+      }
+    }
+  }
+}

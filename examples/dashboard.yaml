@@ -1,0 +1,158 @@
+# Boligsiden dashboard for one search.
+#
+# Create a new dashboard, open it, choose Edit dashboard, then
+# ⋮ -> Raw configuration editor, and replace everything with this file.
+#
+# The entity IDs below are for a search named "Næstved" in an English
+# Home Assistant. Replace "sensor.boligsiden_naestved_" with your own prefix.
+# Find it under Developer tools -> States by searching for "boligsiden".
+title: Boligsiden
+views:
+  - title: Næstved
+    path: naestved
+    icon: mdi:home-search
+    type: sections
+    max_columns: 3
+    sections:
+      # Row 1: overview across the full width. A section spanning 3 columns
+      # has a 36-column grid, so 9 columns = 4 tiles per row, 18 = 2 graphs.
+      - type: grid
+        column_span: 3
+        cards:
+          - type: heading
+            heading: Overview
+            heading_style: title
+          - type: tile
+            entity: sensor.boligsiden_naestved_listings
+            name: For sale
+            grid_options:
+              columns: 9
+            icon: mdi:home-city
+          - type: tile
+            entity: sensor.boligsiden_naestved_lowest_price
+            name: Lowest price
+            grid_options:
+              columns: 9
+            icon: mdi:cash
+          - type: tile
+            entity: sensor.boligsiden_naestved_average_price_per_m2
+            name: Avg. price per m²
+            grid_options:
+              columns: 9
+            icon: mdi:ruler-square
+          - type: tile
+            entity: sensor.boligsiden_naestved_newest_listing
+            name: Newest
+            grid_options:
+              columns: 9
+            icon: mdi:new-box
+          - type: statistics-graph
+            title: Listings for sale
+            grid_options:
+              columns: 18
+            entities:
+              - entity: sensor.boligsiden_naestved_listings
+                name: Listings
+            stat_types:
+              - mean
+            chart_type: line
+            period: day
+            days_to_show: 90
+          - type: statistics-graph
+            title: Average price per m²
+            grid_options:
+              columns: 18
+            entities:
+              - entity: sensor.boligsiden_naestved_average_price_per_m2
+                name: DKK/m²
+            stat_types:
+              - mean
+            chart_type: line
+            period: day
+            days_to_show: 90
+
+      # Row 2, left: newest and cheapest.
+      - type: grid
+        cards:
+          - type: heading
+            heading: Newest listing
+            heading_style: title
+          - type: markdown
+            content: |
+              {% set e = 'sensor.boligsiden_naestved_newest_listing' %}
+              {% if states(e) in ['unknown', 'unavailable', 'None', ''] %}
+              No listings right now.
+              {% else %}
+              {% set a = states[e].attributes %}
+              <a href="{{ a.url }}"><img src="{{ a.image }}" width="100%"></a>
+
+              ## [{{ states(e) }}]({{ a.url }})
+              **{{ '{:,}'.format(a.price | int(0)).replace(',', '.') }} kr.**{% if a.price_change_percentage %} ({{ a.price_change_percentage }}%){% endif %}
+
+              {{ a.living_area }} m² · {{ a.rooms }} rooms{% if a.lot_area %} · {{ a.lot_area }} m² lot{% endif %}{% if a.year_built %} · built {{ a.year_built }}{% endif %}{% if a.energy_label %} · energy label {{ a.energy_label }}{% endif %}
+
+              {{ '{:,}'.format(a.price_per_m2 | int(0)).replace(',', '.') }} kr./m² · {{ a.days_listed }} days on the market · {{ a.realtor }}
+              {% endif %}
+
+          - type: heading
+            heading: Cheapest
+            heading_style: title
+          - type: markdown
+            content: |
+              {% set listings = (state_attr('sensor.boligsiden_naestved_listings', 'listings') or [])
+                 | selectattr('price') | sort(attribute='price') | list %}
+              {% for l in listings[:5] %}
+              {{ loop.index }}. [{{ l.address }}]({{ l.url }}) · **{{ '{:,}'.format(l.price).replace(',', '.') }} kr.** · {{ l.living_area }} m² · {{ l.rooms }} rooms
+              {% else %}
+              No listings right now.
+              {% endfor %}
+
+      # Row 2, right: listings in the budget.
+      - type: grid
+        column_span: 2
+        cards:
+          - type: heading
+            heading: In budget
+            heading_style: title
+          - type: markdown
+            grid_options:
+              columns: full
+            content: |
+              {# Change the budget here. #}
+              {% set budget_min = 2000000 %}
+              {% set budget_max = 3500000 %}
+              {% set kr = '{:,}' %}
+              {% set listings = (state_attr('sensor.boligsiden_naestved_listings', 'listings') or [])
+                 | selectattr('price') | selectattr('price', '>=', budget_min)
+                 | selectattr('price', '<=', budget_max) | list %}
+              **{{ listings | length }} homes** between {{ kr.format(budget_min).replace(',', '.') }} and {{ kr.format(budget_max).replace(',', '.') }} kr., newest first.
+              {% if listings %}
+
+              | | Address | Price (kr.) | m² | Rooms | Days |
+              |---|---|---:|---:|---:|---:|
+              {%- for l in listings %}
+              | <a href="{{ l.url }}"><img src="{{ l.image }}" width="100"></a> | [{{ l.address }}]({{ l.url }})<br><small>{{ l.realtor }}</small> | {{ kr.format(l.price | int(0)).replace(',', '.') }}{% if l.price_change_percentage %}<br><small>{{ l.price_change_percentage }}%</small>{% endif %} | {{ l.living_area or '' }} | {{ l.rooms or '' }} | {{ l.days_listed }} |
+              {%- endfor %}
+              {% endif %}
+
+      # Row 3: all listings across the full width.
+      - type: grid
+        column_span: 3
+        cards:
+          - type: heading
+            heading: All listings
+            heading_style: title
+          - type: markdown
+            grid_options:
+              columns: full
+            content: |
+              {% set listings = state_attr('sensor.boligsiden_naestved_listings', 'listings') or [] %}
+              {% if listings %}
+              | | Address | Price (kr.) | m² | Lot m² | Rooms | Built | Energy | Days |
+              |---|---|---:|---:|---:|---:|---:|:---:|---:|
+              {%- for l in listings %}
+              | <a href="{{ l.url }}"><img src="{{ l.image }}" width="120"></a> | [{{ l.address }}]({{ l.url }})<br><small>{{ l.realtor }}</small> | {{ '{:,}'.format(l.price | int(0)).replace(',', '.') }}{% if l.price_change_percentage %}<br><small>{{ l.price_change_percentage }}%</small>{% endif %} | {{ l.living_area or '' }} | {{ l.lot_area or '' }} | {{ l.rooms or '' }} | {{ l.year_built or '' }} | {{ l.energy_label or '' }} | {{ l.days_listed }} |
+              {%- endfor %}
+              {% else %}
+              No listings right now.
+              {% endif %}

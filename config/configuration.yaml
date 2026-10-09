@@ -1,0 +1,7 @@
+# Local Home Assistant used by scripts/develop.
+default_config:
+
+logger:
+  default: info
+  logs:
+    custom_components.boligsiden: debug

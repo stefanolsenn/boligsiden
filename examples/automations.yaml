@@ -1,0 +1,87 @@
+# Push notifications for Boligsiden listing changes.
+#
+# Paste one automation at a time under Settings -> Automations & scenes ->
+# Create automation -> Create new automation -> ⋮ -> Edit in YAML (without the
+# leading "- "). Or put the whole file in automations.yaml.
+#
+# Replace:
+#   event.boligsiden_naestved_listing_update  with your search's event entity
+#   notify.mobile_app_your_phone                with your phone's notify action
+
+- alias: "Boligsiden: new listing"
+  description: Push when a new home matches a Boligsiden search.
+  triggers:
+    - trigger: event.received
+      target:
+        entity_id: event.boligsiden_naestved_listing_update
+      options:
+        event_type:
+          - new_listing
+  actions:
+    - action: notify.mobile_app_your_phone
+      data:
+        title: "New in {{ trigger.to_state.attributes.city }}: {{ trigger.to_state.attributes.address }}"
+        message: >-
+          {{ '{:,}'.format(trigger.to_state.attributes.price | int(0)).replace(',', '.') }} kr.
+          · {{ trigger.to_state.attributes.living_area }} m²
+          · {{ trigger.to_state.attributes.rooms }} rooms
+          · {{ trigger.to_state.attributes.realtor }}
+        data:
+          image: "{{ trigger.to_state.attributes.image }}"
+          # iOS opens this link when you tap the notification, Android uses clickAction.
+          url: "{{ trigger.to_state.attributes.url }}"
+          clickAction: "{{ trigger.to_state.attributes.url }}"
+          # Replaces an earlier notification about the same home.
+          tag: "{{ trigger.to_state.attributes.case_id }}"
+  mode: queued
+
+- alias: "Boligsiden: price drop"
+  description: Push when a home in a Boligsiden search gets cheaper.
+  triggers:
+    - trigger: event.received
+      target:
+        entity_id: event.boligsiden_naestved_listing_update
+      options:
+        event_type:
+          - price_changed
+  conditions:
+    # Remove this condition to also get notified about price increases.
+    - condition: template
+      value_template: "{{ trigger.to_state.attributes.price_difference < 0 }}"
+  actions:
+    - action: notify.mobile_app_your_phone
+      data:
+        title: "Price drop: {{ trigger.to_state.attributes.address }}"
+        message: >-
+          {{ '{:,}'.format(trigger.to_state.attributes.old_price | int(0)).replace(',', '.') }} kr.
+          → {{ '{:,}'.format(trigger.to_state.attributes.price | int(0)).replace(',', '.') }} kr.
+          ({{ '{:,}'.format(trigger.to_state.attributes.price_difference | abs | int(0)).replace(',', '.') }} kr. less)
+        data:
+          image: "{{ trigger.to_state.attributes.image }}"
+          url: "{{ trigger.to_state.attributes.url }}"
+          clickAction: "{{ trigger.to_state.attributes.url }}"
+          tag: "{{ trigger.to_state.attributes.case_id }}"
+  mode: queued
+
+- alias: "Boligsiden: listing removed"
+  description: Push when a home disappears from a Boligsiden search (sold or withdrawn).
+  triggers:
+    - trigger: event.received
+      target:
+        entity_id: event.boligsiden_naestved_listing_update
+      options:
+        event_type:
+          - listing_removed
+  actions:
+    - action: notify.mobile_app_your_phone
+      data:
+        title: "Gone: {{ trigger.to_state.attributes.address }}"
+        message: >-
+          Last price {{ '{:,}'.format(trigger.to_state.attributes.price | int(0)).replace(',', '.') }} kr.
+          after {{ trigger.to_state.attributes.days_listed }} days on the market.
+        data:
+          image: "{{ trigger.to_state.attributes.image }}"
+          url: "{{ trigger.to_state.attributes.url }}"
+          clickAction: "{{ trigger.to_state.attributes.url }}"
+          tag: "{{ trigger.to_state.attributes.case_id }}"
+  mode: queued

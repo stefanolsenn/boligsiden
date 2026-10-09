@@ -1,0 +1,253 @@
+{
+  "_links": {
+    "self": {
+      "href": "/search/cases"
+    }
+  },
+  "cases": [
+    {
+      "caseID": "11111111-1111-4111-8111-111111111111",
+      "caseUrl": "https://example.com/sag/1",
+      "slug": "eksempelvej-25-4700-naestved",
+      "addressType": "villa",
+      "priceCash": 2698000,
+      "priceChangePercentage": 0,
+      "perAreaPrice": 14023,
+      "housingArea": 148,
+      "lotArea": 800,
+      "numberOfRooms": 5,
+      "yearBuilt": 1969,
+      "energyLabel": "d",
+      "daysListed": {
+        "days": 72
+      },
+      "monthlyExpense": 1810,
+      "status": "open",
+      "coordinates": {
+        "lat": 55.2301,
+        "lon": 11.7612,
+        "type": "EPSG4326"
+      },
+      "defaultImage": {
+        "imageSources": [
+          {
+            "alt": "Et hus",
+            "size": {
+              "height": 80,
+              "width": 100
+            },
+            "url": "https://images.boligsiden.dk/images/case/11111111-1111-4111-8111-111111111111/100x80/11111111-1111-4111-8111-111111111111.webp"
+          },
+          {
+            "alt": "Et hus",
+            "size": {
+              "height": 200,
+              "width": 300
+            },
+            "url": "https://images.boligsiden.dk/images/case/11111111-1111-4111-8111-111111111111/300x200/11111111-1111-4111-8111-111111111111.webp"
+          },
+          {
+            "alt": "Et hus",
+            "size": {
+              "height": 400,
+              "width": 600
+            },
+            "url": "https://images.boligsiden.dk/images/case/11111111-1111-4111-8111-111111111111/600x400/11111111-1111-4111-8111-111111111111.webp"
+          },
+          {
+            "alt": "Et hus",
+            "size": {
+              "height": 600,
+              "width": 600
+            },
+            "url": "https://images.boligsiden.dk/images/case/11111111-1111-4111-8111-111111111111/600x600/11111111-1111-4111-8111-111111111111.webp"
+          },
+          {
+            "alt": "Et hus",
+            "size": {
+              "height": 960,
+              "width": 1440
+            },
+            "url": "https://images.boligsiden.dk/images/case/11111111-1111-4111-8111-111111111111/1440x960/11111111-1111-4111-8111-111111111111.webp"
+          }
+        ]
+      },
+      "realtor": {
+        "name": "Eksempel Mægler"
+      },
+      "address": {
+        "roadName": "Eksempelvej",
+        "houseNumber": "25",
+        "zipCode": 4700,
+        "cityName": "Næstved",
+        "city": {
+          "name": "Næstved",
+          "slug": "naestved"
+        }
+      }
+    },
+    {
+      "caseID": "22222222-2222-4222-8222-222222222222",
+      "caseUrl": "https://example.com/sag/2",
+      "slug": "proevevej-26-4700-naestved",
+      "addressType": "villa",
+      "priceCash": 3395000,
+      "priceChangePercentage": 0,
+      "perAreaPrice": 13829,
+      "housingArea": 237,
+      "lotArea": 1461,
+      "numberOfRooms": 5,
+      "yearBuilt": 1780,
+      "energyLabel": "b",
+      "daysListed": {
+        "days": 88
+      },
+      "monthlyExpense": 2808,
+      "status": "open",
+      "coordinates": {
+        "lat": 55.2342,
+        "lon": 11.7655,
+        "type": "EPSG4326"
+      },
+      "defaultImage": {
+        "imageSources": [
+          {
+            "alt": "Et hus",
+            "size": {
+              "height": 80,
+              "width": 100
+            },
+            "url": "https://images.boligsiden.dk/images/case/22222222-2222-4222-8222-222222222222/100x80/22222222-2222-4222-8222-222222222222.webp"
+          },
+          {
+            "alt": "Et hus",
+            "size": {
+              "height": 200,
+              "width": 300
+            },
+            "url": "https://images.boligsiden.dk/images/case/22222222-2222-4222-8222-222222222222/300x200/22222222-2222-4222-8222-222222222222.webp"
+          },
+          {
+            "alt": "Et hus",
+            "size": {
+              "height": 400,
+              "width": 600
+            },
+            "url": "https://images.boligsiden.dk/images/case/22222222-2222-4222-8222-222222222222/600x400/22222222-2222-4222-8222-222222222222.webp"
+          },
+          {
+            "alt": "Et hus",
+            "size": {
+              "height": 600,
+              "width": 600
+            },
+            "url": "https://images.boligsiden.dk/images/case/22222222-2222-4222-8222-222222222222/600x600/22222222-2222-4222-8222-222222222222.webp"
+          },
+          {
+            "alt": "Et hus",
+            "size": {
+              "height": 960,
+              "width": 1440
+            },
+            "url": "https://images.boligsiden.dk/images/case/22222222-2222-4222-8222-222222222222/1440x960/22222222-2222-4222-8222-222222222222.webp"
+          }
+        ]
+      },
+      "realtor": {
+        "name": "Demo Bolig"
+      },
+      "address": {
+        "roadName": "Prøvevej",
+        "houseNumber": "26",
+        "zipCode": 4700,
+        "cityName": "Næstved",
+        "city": {
+          "name": "Næstved",
+          "slug": "naestved"
+        }
+      }
+    },
+    {
+      "caseID": "33333333-3333-4333-8333-333333333333",
+      "caseUrl": "https://example.com/sag/3",
+      "slug": "demovej-52-4700-naestved",
+      "addressType": "villa",
+      "priceCash": 675000,
+      "priceChangePercentage": 0,
+      "perAreaPrice": 4305,
+      "housingArea": 150,
+      "lotArea": 860,
+      "numberOfRooms": 5,
+      "yearBuilt": 1878,
+      "energyLabel": "d",
+      "daysListed": {
+        "days": 123
+      },
+      "monthlyExpense": 1772,
+      "status": "open",
+      "coordinates": {
+        "lat": 55.2288,
+        "lon": 11.7581,
+        "type": "EPSG4326"
+      },
+      "defaultImage": {
+        "imageSources": [
+          {
+            "alt": "Et hus",
+            "size": {
+              "height": 80,
+              "width": 100
+            },
+            "url": "https://images.boligsiden.dk/images/case/33333333-3333-4333-8333-333333333333/100x80/33333333-3333-4333-8333-333333333333.webp"
+          },
+          {
+            "alt": "Et hus",
+            "size": {
+              "height": 200,
+              "width": 300
+            },
+            "url": "https://images.boligsiden.dk/images/case/33333333-3333-4333-8333-333333333333/300x200/33333333-3333-4333-8333-333333333333.webp"
+          },
+          {
+            "alt": "Et hus",
+            "size": {
+              "height": 400,
+              "width": 600
+            },
+            "url": "https://images.boligsiden.dk/images/case/33333333-3333-4333-8333-333333333333/600x400/33333333-3333-4333-8333-333333333333.webp"
+          },
+          {
+            "alt": "Et hus",
+            "size": {
+              "height": 600,
+              "width": 600
+            },
+            "url": "https://images.boligsiden.dk/images/case/33333333-3333-4333-8333-333333333333/600x600/33333333-3333-4333-8333-333333333333.webp"
+          },
+          {
+            "alt": "Et hus",
+            "size": {
+              "height": 960,
+              "width": 1440
+            },
+            "url": "https://images.boligsiden.dk/images/case/33333333-3333-4333-8333-333333333333/1440x960/33333333-3333-4333-8333-333333333333.webp"
+          }
+        ]
+      },
+      "realtor": {
+        "name": "Test Ejendomme"
+      },
+      "address": {
+        "roadName": "Demovej",
+        "houseNumber": "52",
+        "zipCode": 4700,
+        "cityName": "Næstved",
+        "city": {
+          "name": "Næstved",
+          "slug": "naestved"
+        }
+      }
+    }
+  ],
+  "totalHits": 3
+}
