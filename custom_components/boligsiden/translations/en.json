@@ -15,7 +15,7 @@
           "city": "The postal town as Boligsiden names it, e.g. \"Næstved\" or \"Aarhus C\".",
           "price_min": "Optional.",
           "price_max": "Optional.",
-          "scan_interval": "How often to check for new listings, in minutes. Minimum 60."
+          "scan_interval": "How often to check for new listings, in minutes. Minimum 5."
         }
       }
     },
@@ -39,7 +39,7 @@
           "scan_interval": "Update interval"
         },
         "data_description": {
-          "scan_interval": "How often to check for new listings, in minutes. Minimum 60."
+          "scan_interval": "How often to check for new listings, in minutes. Minimum 5."
         }
       }
     },

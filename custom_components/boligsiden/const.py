@@ -16,8 +16,8 @@ CONF_PRICE_MAX = "price_max"
 CONF_SCAN_INTERVAL = "scan_interval"
 
 # Minutes. Kept conservative since the API is unofficial.
-DEFAULT_SCAN_INTERVAL = 180
-MIN_SCAN_INTERVAL = 60
+DEFAULT_SCAN_INTERVAL = 60
+MIN_SCAN_INTERVAL = 5
 MAX_SCAN_INTERVAL = 1440
 
 # Spread requests from many installs so they don't hit the API at the same time.
