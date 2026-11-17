@@ -58,7 +58,7 @@ SCAN_INTERVAL_SELECTOR = NumberSelector(
     NumberSelectorConfig(
         min=MIN_SCAN_INTERVAL,
         max=MAX_SCAN_INTERVAL,
-        step=15,
+        step=5,
         mode=NumberSelectorMode.BOX,
         unit_of_measurement="min",
     )

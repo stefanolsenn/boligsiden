@@ -15,7 +15,7 @@
           "city": "Postbyen som Boligsiden skriver den, f.eks. \"Næstved\" eller \"Aarhus C\".",
           "price_min": "Valgfri.",
           "price_max": "Valgfri.",
-          "scan_interval": "Hvor ofte der tjekkes for nye boliger, i minutter. Mindst 60."
+          "scan_interval": "Hvor ofte der tjekkes for nye boliger, i minutter. Mindst 5."
         }
       }
     },
@@ -39,7 +39,7 @@
           "scan_interval": "Opdateringsinterval"
         },
         "data_description": {
-          "scan_interval": "Hvor ofte der tjekkes for nye boliger, i minutter. Mindst 60."
+          "scan_interval": "Hvor ofte der tjekkes for nye boliger, i minutter. Mindst 5."
         }
       }
     },
