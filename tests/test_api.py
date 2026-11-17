@@ -36,7 +36,9 @@ async def test_search_parses_listings(
     assert first.price == 2698000
     assert first.energy_label == "D"
     assert first.days_listed == 72
-    assert first.url.startswith("https://")
+    assert first.url == (
+        "https://www.boligsiden.dk/viderestilling/11111111-1111-4111-8111-111111111111"
+    )
     assert "/600x" in first.image
 
     params = aioclient_mock.mock_calls[0][1].query

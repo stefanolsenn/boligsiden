@@ -14,6 +14,7 @@ TIMEOUT = aiohttp.ClientTimeout(total=30)
 USER_AGENT = "ha-boligsiden (+https://github.com/stefanolsenn/boligsiden)"
 
 IMAGE_WIDTH = 600
+REDIRECT_URL = "https://www.boligsiden.dk/viderestilling/{case_id}"
 
 
 class BoligsidenError(Exception):
@@ -76,7 +77,7 @@ class Listing:
             days_listed=(case.get("daysListed") or {}).get("days"),
             monthly_expense=case.get("monthlyExpense"),
             realtor=(case.get("realtor") or {}).get("name"),
-            url=case.get("caseUrl"),
+            url=REDIRECT_URL.format(case_id=case["caseID"]),
             image=_pick_image(case.get("defaultImage")),
             latitude=coordinates.get("lat"),
             longitude=coordinates.get("lon"),
