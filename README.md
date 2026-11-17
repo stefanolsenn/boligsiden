@@ -16,6 +16,40 @@ Or add it by hand:
 2. Add `https://github.com/stefanolsenn/boligsiden` with type **Integration**.
 3. Install **Boligsiden** and restart Home Assistant.
 
+## Setup
+
+[![Open your Home Assistant instance and start setting up Boligsiden.](https://my.home-assistant.io/badges/config_flow_start.svg)](https://my.home-assistant.io/redirect/config_flow_start/?domain=boligsiden)
+
+Go to **Settings** > **Devices & services** > **Add integration** and search for **Boligsiden**. Each entry is one saved search:
+
+| Field | Description |
+|---|---|
+| City | The postal town as Boligsiden names it, e.g. `Næstved` or `Aarhus C`. |
+| Property types | One or more of villa, terraced house, condo, villa apartment, cooperative, holiday house, farm, hobby farm and plots. |
+| Minimum price | Optional, in DKK. |
+| Maximum price | Optional, in DKK. |
+| Update interval | How often to check for changes, in minutes. 5 to 1440, default 60. |
+
+Add the integration again to track more searches. To change the price range or update interval later, open the entry and choose **Configure**.
+
+## Sensors
+
+Each search gets a device with four sensors:
+
+| Sensor | State | Attributes |
+|---|---|---|
+| Listings | Number of homes for sale in the search | `listings`: all listings, newest first |
+| Newest listing | Address of the most recently listed home | That listing's details |
+| Lowest price | Price of the cheapest home, in DKK | That listing's details |
+| Average price per m² | Average asking price per m², in DKK/m² | |
+
+## Examples
+
+The [`examples/`](examples/) folder has ready-to-use YAML:
+
+- [`automations.yaml`](examples/automations.yaml): push notifications for new listings, price drops and removed listings.
+- [`dashboard.yaml`](examples/dashboard.yaml): a dashboard for one search.
+
 ## Events
 
 The **Listing update** event entity (e.g. `event.boligsiden_example_town_listing_update`) receives an event every time a listing changes:
